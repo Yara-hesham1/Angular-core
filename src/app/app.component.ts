@@ -9,6 +9,17 @@ import {COURSES} from '../db-data';
 })
 export class AppComponent {
 
-title="Angular Core Deep Dive"
+    data={
+     title:"Angular Core Deep Dive"
+    }
+
+    onLogoClicked(){
+        alert('Hello world');
+
+    }
+
+    onKeyUp(newTitle:string){
+this.data.title=newTitle;
+    }
 
 }

@@ -1,21 +1,11 @@
 
-/* .top-menu {
-    background: #1976d2;
-    padding: 2px 15px;
-}
-
-.logo {
-  max-height: 55px;
-}
-
-
-.courses {
-    max-width: 400px;
-    margin: 50px auto;
-} */
-
-
 input.demo{
-  
+  border:2px solid black ;
+  width: 300;
+  height: 30;
+  font-size: 25;
+  display: flex;
+  justify-content: center;
+
 }
 
