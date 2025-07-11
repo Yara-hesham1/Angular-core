@@ -1,14 +1,66 @@
-<!-- <div class="top-menu">
+<div class="top-menu">
 
     <img class="logo"
          src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 
-</div> -->
+</div>
+
+<!-- <h1>{{rjxCourse.description}}</h1> -->
+<div class="demo">
+    <div>Start Date:{{startDate | date:'MMM dd yyyy:'}}</div>
+    <div>{{price |number:'3.5-5'}}</div>
+    <div>{{price |currency : 'GBP'}}</div>
+    <div>{{title | lowercase}}</div>
+    <div>{{rate | percent}}</div>
+</div>
+
+<button (click)="onCoursesEdited()">Edit Courses</button>
+
+<div class="courses" #container >
+
+    <course-card #cardRef1
+    *ngFor="let course of courses"
+ (courseSelected)="onCourseSelected($event)" 
+ [course]="courses[1]" [cardIndex]=""
+ />
 
 
-<div class="courses">
 
-    <div class="course-card">
+
+<!-- <course-card *ngFor="let course of courses | slice:0:4 ;index as i;first as isFirst;last as isLast ;even as isEven;odd as isOdd"
+ 
+[class.is-first]="isFirst"
+ [class.is-last]="isLast"
+ (courseSelected)="onCourseSelected($event)" 
+ [course]="course" 
+ [cardIndex]="i+1"
+ [class.is-even]="isEven"
+ [class.is-odd]="isOdd"
+ /> -->
+
+<!-- @for (course of courses; track course.id ; let index =$index; let count=$count;let last=$last
+;let even=$even ; let odd=$odd){
+<h1>Count:{{count}}</h1>
+
+<course-card
+(courseSelected)="onCourseSelected($event)" 
+[index]="index" 
+[class.is-first]=$first
+[class.is-last]="last"
+[class.is-even]="even"
+[class.is-odd]="odd"
+[course]="course"/>    
+}
+
+@empty{
+    <h1>No Courses found!</h1>
+} -->
+
+
+<!-- <course-card (courseSelected)="onCourseSelected($event)"  [course]="coreCourse"/>     -->
+
+    
+    <!-- <div class="course-card">
 
         <div class="course-title">
            Welcome to {{data.title}}!
@@ -19,7 +71,7 @@
 
         <input class="demo" (keyup)="onKeyUp(titleInput.value)" [value]="data.title" #titleInput>
 
-    </div>
+    </div> -->
 
 </div>
 
