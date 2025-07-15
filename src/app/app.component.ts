@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, viewChild, 
 import {COURSES} from '../db-data';
 import { Course } from './model/course';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { HighlightedDirective } from './directives/highlighted.directive';
 
 
 @Component({
@@ -36,6 +37,14 @@ courses=COURSES;
 
 
 
+@ViewChild(HighlightedDirective,{read:HighlightedDirective})
+highlighted:HighlightedDirective;
+    
+ngAfterViewInit(){
+    console.log(this.highlighted);
+    
+}
+
 
 onCardClicked(){
     console.log("App comp");
@@ -66,17 +75,20 @@ containerDiv:ElementRef
 @ViewChildren(CourseCardComponent , {read:ElementRef})
 cards:QueryList<CourseCardComponent>;
 
+onToggle(isHighlighted:boolean){
+    console.log(isHighlighted); 
 
+}
 constructor(){
 
 }
 
-ngAfterViewInit() {
-    // console.log(this.cards.first);
-   this.cards.changes.subscribe(cards=>{console.log(cards)});
+// ngAfterViewInit() {
+//     // console.log(this.cards.first);
+//    this.cards.changes.subscribe(cards=>{console.log(cards)});
     
     
-}
+// }
 
 onCoursesEdited(){
     this.courses.push(

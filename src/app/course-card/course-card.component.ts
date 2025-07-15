@@ -1,22 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output, output } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild,  ContentChildren,  ElementRef,  EventEmitter, input, Input, OnInit, Output, output, QueryList, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Course } from '../model/course';
 import { COURSES } from 'src/db-data';
 import { text } from 'body-parser';
+import { CourseImageComponent } from '../course-image/course-image.component';
 
 
 @Component({
   selector: 'course-card',
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css'],
-  standalone:false
+  standalone:false,
+  encapsulation:ViewEncapsulation.ShadowDom
 
 })
-export class CourseCardComponent implements OnInit{
+export class CourseCardComponent implements OnInit,AfterViewInit,AfterContentInit{
 
   @Input({
     required:true
   })
 course:Course;
+
+@Input()
+noImageTpl:TemplateRef<any>;
 
 // @Input({
 //   required:true
@@ -36,9 +41,33 @@ cardIndex:number;
 @Output('courseSelected')
 courseEmitter=new EventEmitter<Course>();
 
+// @ContentChild('courseImage')
+// image;
+
+// @ContentChild(CourseImageComponent,{read:ElementRef})
+// image:ElementRef;
+
+
+@ContentChildren(CourseImageComponent,{read:ElementRef})
+images:QueryList<ElementRef>;
 
 
   constructor(){}
+  ngAfterViewInit(){
+  }
+  
+  ngAfterContentInit(){
+
+    console.log(this.images);
+    
+  }
+
+
+
+  // ngAfterViewInit(){
+  //   console.log(this.image);
+    
+  // }
    ngOnInit(){}
 
    isImageVisible(){

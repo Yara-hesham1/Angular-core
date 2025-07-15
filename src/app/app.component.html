@@ -1,8 +1,12 @@
-<div class="top-menu">
+<div class="top-menu" highlighted>
 
     <img class="logo"
          src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 
+</div>
+
+<div class="course-card">
+    Test card
 </div>
 
 <!-- <h1>{{rjxCourse.description}}</h1> -->
@@ -16,13 +20,87 @@
 
 <button (click)="onCoursesEdited()">Edit Courses</button>
 
-<div class="courses" #container >
 
-    <course-card #cardRef1
+<ng-template [ngIf]="courses[1] " let-course>
+
+    <div class="courses salmon-theme" #container >
+
+<ng-template #blankImage let-courseName="description"  >
+            <p class="warn">{{courseName}}No image is availble yet.     </p>
+            <!-- <img src="/src/assets/empty-image.png" > -->
+        </ng-template>
+
+<!-- <div *ngTemplateOutlet="blankImage;context:{description:course.description
+}">
+
+</div> -->
+
+<!-- <ng-container *ngTemplateOutlet="blankImage;context:{description:course.description
+}">
+</ng-container> -->
+
+<hr>
+<hr>
+
+    <course-card highlighted   #highlighter="hl"
+    (toggleHighlighted)="onToggle($event)"
+ (courseSelected)="onCourseSelected($event)" 
+ [course]="course"  [noImageTpl]="blankImage"
+ >
+
+ <!-- <div class="course-image"  #courseImage>
+<img width="300" alt="Angular Logo" 
+             [src]="course.iconUrl">
+
+    <h2>total lessons:5</h2>
+ </div> -->
+
+
+<ng-container *ngxUnless="!course.iconUrl">
+  <course-image [src]="course.iconUrl"></course-image>
+</ng-container>
+
+
+
+
+ <!-- <course-image [src]="courses[1].iconUrl"></course-image>
+ <course-image [src]="courses[2].iconUrl"></course-image> -->
+
+    <div class="course-description"
+    (dblclick)="highlighter.toggle()">
+            {{course.longDescription}}
+        </div>
+
+--Edit description--
+
+</course-card>
+
+
+<course-card highlighted [course]="courses[2]"></course-card>
+
+<!-- <course-card 
+ (courseSelected)="onCourseSelected($event)" 
+ [course]="courses[3]" 
+ >
+
+<img width="300" alt="Angular Logo" 
+             [src]="course.iconUrl">
+
+    <h2>total lessons:3</h2>
+
+</course-card> -->
+
+
+
+
+
+
+
+    <!-- <course-card #cardRef1
     *ngFor="let course of courses"
  (courseSelected)="onCourseSelected($event)" 
  [course]="courses[1]" [cardIndex]=""
- />
+ /> -->
 
 
 
@@ -74,5 +152,8 @@
     </div> -->
 
 </div>
+</ng-template>
+
+
 
 
